@@ -13,8 +13,8 @@ const LedgerTable = ({ ledger }) => {
         </tr>
       </thead>
       <tbody>
-        {ledger.map(entry => (
-          <tr key={entry.id}>
+        {ledger.map((entry, index) => (
+          <tr key={index}>
             <td>{entry.date}</td>
             <td>{entry.item}</td>
             <td>{entry.debit}</td>

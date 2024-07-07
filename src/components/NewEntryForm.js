@@ -8,11 +8,22 @@ const NewEntryForm = ({ addEntry }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addEntry({ date, item, debit, credit });
+    const balance = calculateNewBalance(debit, credit);
+    addEntry({ date, item, debit, credit, balance });
     setDate('');
     setItem('');
     setDebit('');
     setCredit('');
+  };
+
+  const calculateNewBalance = (debit, credit) => {
+    // calculate the new balance based on the current balance and the debit/credit values
+
+    // implement here
+
+    // return the new balance
+    
+    // return balance + (credit - debit); <-- uncomment this line
   };
 
   return (
