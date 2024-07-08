@@ -1,6 +1,10 @@
 import React from 'react';
 
 const LedgerTable = ({ ledger }) => {
+  if (!Array.isArray(ledger)) {
+    return null;
+  }
+
   return (
     <table>
       <thead>

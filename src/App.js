@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { db } from './firebase';
+import { db, doc, getDoc, updateDoc } from './firebase';
 import UserTabs from './components/UserTabs';
 import Balance from './components/Balance';
 import LedgerTable from './components/LedgerTable';
 import NewEntryForm from './components/NewEntryForm';
-
 
 const users = ['Grandma', 'Desmond & Allie', 'Ronan', 'Nicole', 'Karen', 'Bob'];
 
@@ -15,25 +14,30 @@ const App = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const userDoc = await db.collection('users').doc(selectedUser).get();
-      if (userDoc.exists) {
-        setBalance(userDoc.data().balance);
-        setLedger(userDoc.data().ledger);
+      const userDoc = await getDoc(doc(db, 'users', selectedUser));
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        setBalance(userData.balance || 0);
+        setLedger(userData.ledger || []);
+      } else {
+        setBalance(0);
+        setLedger([]);
       }
     };
     fetchData();
   }, [selectedUser]);
 
   const updateBalance = async (newBalance) => {
-    await db.collection('users').doc(selectedUser).update({ balance: newBalance });
+    await updateDoc(doc(db, 'users', selectedUser), { balance: newBalance });
     setBalance(newBalance);
   };
 
   const addEntry = async (entry) => {
     const newLedger = [...ledger, entry];
-    await db.collection('users').doc(selectedUser).update({ ledger: newLedger });
+    const newBalance = entry.balance;
+    await updateDoc(doc(db, 'users', selectedUser), { ledger: newLedger, balance: newBalance });
     setLedger(newLedger);
-    setBalance(entry.balance);
+    setBalance(newBalance);
   };
 
   return (
@@ -41,7 +45,7 @@ const App = () => {
       <UserTabs users={users} selectUser={setSelectedUser} />
       <Balance user={selectedUser} balance={balance} updateBalance={updateBalance} />
       <LedgerTable ledger={ledger} />
-      <NewEntryForm addEntry={addEntry} />
+      <NewEntryForm addEntry={addEntry} currentBalance={balance} />
     </div>
   );
 };
