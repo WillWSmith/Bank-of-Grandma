@@ -27,11 +27,6 @@ const App = () => {
     fetchData();
   }, [selectedUser]);
 
-  const updateBalance = async (newBalance) => {
-    await updateDoc(doc(db, 'users', selectedUser), { balance: newBalance });
-    setBalance(newBalance);
-  };
-
   const addEntry = async (entry) => {
     const newLedger = [...ledger, entry];
     const newBalance = entry.balance;
@@ -40,11 +35,43 @@ const App = () => {
     setBalance(newBalance);
   };
 
+  const editEntry = async (index, editedEntry) => {
+    const newLedger = [...ledger];
+  
+    // Ensure debit and credit values are numbers
+    editedEntry.debit = parseFloat(editedEntry.debit) || 0;
+    editedEntry.credit = parseFloat(editedEntry.credit) || 0;
+  
+    // Calculate the balance for this entry
+    if (index === 0) {
+      // For the first entry, balance starts with the first transaction
+      editedEntry.balance = editedEntry.credit - editedEntry.debit;
+    } else {
+      // For subsequent entries, base the balance on the previous entry's balance
+      editedEntry.balance = newLedger[index - 1].balance + editedEntry.credit - editedEntry.debit;
+    }
+  
+    newLedger[index] = editedEntry;
+  
+    // Recalculate the balance for all entries after the edited one
+    for (let i = index + 1; i < newLedger.length; i++) {
+      newLedger[i].balance = newLedger[i - 1].balance + newLedger[i].credit - newLedger[i].debit;
+    }
+  
+    // Update the root balance to match the last entry's balance
+    const finalBalance = newLedger[newLedger.length - 1].balance;
+    await updateDoc(doc(db, 'users', selectedUser), { ledger: newLedger, balance: finalBalance });
+  
+    // Update the state
+    setLedger(newLedger);
+    setBalance(finalBalance);
+  };  
+
   return (
     <div>
       <UserTabs users={users} selectUser={setSelectedUser} />
-      <Balance user={selectedUser} balance={balance} updateBalance={updateBalance} />
-      <LedgerTable ledger={ledger} />
+      <Balance user={selectedUser} balance={balance} />
+      <LedgerTable ledger={ledger} onEditEntry={editEntry} />
       <NewEntryForm addEntry={addEntry} currentBalance={balance} />
     </div>
   );
