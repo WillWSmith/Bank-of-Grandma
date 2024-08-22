@@ -60,7 +60,6 @@ const NewEntryForm = ({ addEntry, currentBalance }) => {
         onChange={(e) => setCredit(e.target.value)}
         placeholder="Credit"
       />
-      <td></td>
       <button type="submit">Add</button>
     </form>
   );

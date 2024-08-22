@@ -91,36 +91,36 @@ tr:hover {
 }
 
 /* Form styling */
-form {
+form.new-entry-form {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
 
-input[type="date"],
-input[type="text"],
-input[type="number"] {
-  padding: 2px; /* Smaller padding for smaller input boxes */
+form.new-entry-form input[type="date"],
+form.new-entry-form input[type="text"],
+form.new-entry-form input[type="number"] {
+  padding: 5px; /* Slightly increased padding for better usability */
   margin-right: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  font-size: 0.9rem; /* Slightly smaller font size */
+  font-size: 0.9rem;
   flex: 1;
 }
 
-input[type="date"] {
+form.new-entry-form input[type="date"] {
   max-width: 120px; /* Adjust width to align better with table */
 }
 
-input[type="text"] {
-  max-width: 100px; /* Adjust width to align better with table */
+form.new-entry-form input[type="text"] {
+  max-width: 120px; /* Slightly increased width for more space */
 }
 
-input[type="number"] {
-  max-width: 100px; /* Adjust width to align better with table */
+form.new-entry-form input[type="number"] {
+  max-width: 100px;
 }
 
-button[type="submit"] {
+form.new-entry-form button[type="submit"] {
   background-color: #4a90e2;
   color: white;
   border: none;
@@ -131,9 +131,10 @@ button[type="submit"] {
   flex-shrink: 0;
 }
 
-button[type="submit"]:hover {
+form.new-entry-form button[type="submit"]:hover {
   background-color: #357ABD;
 }
+
 
 /* Edit and Cancel buttons */
 button {
