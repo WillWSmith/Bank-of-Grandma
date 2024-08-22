@@ -1,0 +1,170 @@
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Base styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Container for the entire app */
+.app-container {
+  max-width: 800px;
+  margin: 20px auto;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo styling */
+.logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo img {
+  width: 100px;
+  height: auto;
+  border-radius: 50%;
+}
+
+/* Header styles */
+h2 {
+  font-size: 1.8rem;
+  color: #4a90e2;
+  text-align: center;
+}
+
+/* UserTabs styling */
+.user-tabs {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.user-tabs button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.user-tabs button:hover {
+  background-color: #357ABD;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f0f0f0;
+  font-weight: 600;
+}
+
+td {
+  background-color: #fafafa;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Form styling */
+form {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+input[type="date"],
+input[type="text"],
+input[type="number"] {
+  padding: 2px; /* Smaller padding for smaller input boxes */
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 0.9rem; /* Slightly smaller font size */
+  flex: 1;
+}
+
+input[type="date"] {
+  max-width: 120px; /* Adjust width to align better with table */
+}
+
+input[type="text"] {
+  max-width: 100px; /* Adjust width to align better with table */
+}
+
+input[type="number"] {
+  max-width: 100px; /* Adjust width to align better with table */
+}
+
+button[type="submit"] {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
+}
+
+button[type="submit"]:hover {
+  background-color: #357ABD;
+}
+
+/* Edit and Cancel buttons */
+button {
+  margin-right: 10px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #357ABD;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  form {
+    flex-direction: column;
+  }
+
+  input[type="date"],
+  input[type="text"],
+  input[type="number"] {
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+  }
+}

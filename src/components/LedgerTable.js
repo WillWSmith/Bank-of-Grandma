@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import NewEntryForm from './NewEntryForm';
 
-const LedgerTable = ({ ledger, onEditEntry }) => {
+const LedgerTable = ({ ledger, onEditEntry, addEntry, currentBalance }) => {
   return (
     <table>
       <thead>
@@ -22,6 +23,7 @@ const LedgerTable = ({ ledger, onEditEntry }) => {
             onEditEntry={onEditEntry}
           />
         ))}
+        <NewEntryForm addEntry={addEntry} currentBalance={currentBalance} />
       </tbody>
     </table>
   );
