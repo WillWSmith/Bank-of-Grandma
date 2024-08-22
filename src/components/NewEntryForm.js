@@ -37,24 +37,32 @@ const NewEntryForm = ({ addEntry, currentBalance }) => {
   };
 
   return (
-    <tr>
-      <td>
-        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
-      </td>
-      <td>
-        <input value={item} onChange={(e) => setItem(e.target.value)} placeholder="Item" required />
-      </td>
-      <td>
-        <input value={debit} onChange={(e) => setDebit(e.target.value)} placeholder="Debit" />
-      </td>
-      <td>
-        <input value={credit} onChange={(e) => setCredit(e.target.value)} placeholder="Credit" />
-      </td>
+    <form className="new-entry-form" onSubmit={handleSubmit}>
+      <input
+        type="date"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+        required
+      />
+      <input
+        value={item}
+        onChange={(e) => setItem(e.target.value)}
+        placeholder="Item"
+        required
+      />
+      <input
+        value={debit}
+        onChange={(e) => setDebit(e.target.value)}
+        placeholder="Debit"
+      />
+      <input
+        value={credit}
+        onChange={(e) => setCredit(e.target.value)}
+        placeholder="Credit"
+      />
       <td></td>
-      <td>
-        <button type="submit" onClick={handleSubmit}>Add</button>
-      </td>
-    </tr>
+      <button type="submit">Add</button>
+    </form>
   );
 };
 

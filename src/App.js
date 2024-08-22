@@ -91,8 +91,6 @@ const App = () => {
         currentPage={currentPage}
         entriesPerPage={entriesPerPage}
       />
-      <NewEntryForm addEntry={addEntry} currentBalance={balance} />
-      {/* Pagination controls */}
       <div className="pagination">
         {[...Array(totalPages)].map((_, index) => (
           <button
@@ -104,6 +102,7 @@ const App = () => {
           </button>
         ))}
       </div>
+      <NewEntryForm addEntry={addEntry} currentBalance={balance} />
     </div>
   );
 };
