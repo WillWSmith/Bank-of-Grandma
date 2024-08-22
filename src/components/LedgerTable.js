@@ -10,6 +10,7 @@ const LedgerTable = ({ ledger, onEditEntry }) => {
           <th>Debit</th>
           <th>Credit</th>
           <th>Balance</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -30,6 +31,11 @@ const LedgerRow = ({ entry, index, onEditEntry }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedEntry, setEditedEntry] = useState({ ...entry });
 
+  const handleEditClick = () => {
+    setEditedEntry({ ...entry });
+    setIsEditing(true);
+  };
+
   const handleEditChange = (e) => {
     const { name, value } = e.target;
     setEditedEntry((prev) => ({
@@ -39,9 +45,6 @@ const LedgerRow = ({ entry, index, onEditEntry }) => {
   };
 
   const handleSave = () => {
-    // Convert balance to a number before saving
-    editedEntry.debit = parseFloat(editedEntry.debit) || 0;
-    editedEntry.credit = parseFloat(editedEntry.credit) || 0;
     onEditEntry(index, editedEntry);
     setIsEditing(false);
   };
@@ -68,7 +71,7 @@ const LedgerRow = ({ entry, index, onEditEntry }) => {
           <td>{entry.credit}</td>
           <td>{entry.balance}</td>
           <td>
-            <button onClick={() => setIsEditing(true)}>Edit</button>
+            <button onClick={handleEditClick}>Edit</button>
           </td>
         </>
       )}
