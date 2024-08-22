@@ -168,3 +168,31 @@ button:hover {
     width: 100%;
   }
 }
+
+/* Pagination */
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.pagination button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover:not([disabled]) {
+  background-color: #357ABD;
+}
+
+.pagination button[disabled] {
+  background-color: #7fb3e9;
+  cursor: not-allowed;
+}
+

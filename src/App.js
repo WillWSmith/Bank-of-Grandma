@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { db, doc, getDoc, updateDoc } from './firebase';
+
+// Components
 import UserTabs from './components/UserTabs';
 import Balance from './components/Balance';
 import LedgerTable from './components/LedgerTable';
-import logo from './media/logo192.png';
+import NewEntryForm from './components/NewEntryForm';
 
+// Styles
+import logo from './media/logo192.png';
 import './App.css';
 
 const users = ['Grandma', 'Desmond & Allie', 'Ronan', 'Nicole', 'Karen', 'Bob'];
@@ -13,6 +17,8 @@ const App = () => {
   const [selectedUser, setSelectedUser] = useState(users[0]);
   const [balance, setBalance] = useState(0);
   const [ledger, setLedger] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const entriesPerPage = 10;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,6 +27,7 @@ const App = () => {
         const userData = userDoc.data();
         setBalance(userData.balance || 0);
         setLedger(userData.ledger || []);
+        setCurrentPage(1);
       } else {
         setBalance(0);
         setLedger([]);
@@ -60,7 +67,14 @@ const App = () => {
   
     setLedger(newLedger);
     setBalance(finalBalance);
-  };  
+  };
+
+  // Pagination logic
+  const totalPages = Math.ceil(ledger.length / entriesPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div className="app-container">
@@ -71,7 +85,25 @@ const App = () => {
         <UserTabs users={users} selectUser={setSelectedUser} />
       </div>
       <Balance user={selectedUser} balance={balance} />
-      <LedgerTable ledger={ledger} onEditEntry={editEntry} addEntry={addEntry} currentBalance={balance} />
+      <LedgerTable
+        ledger={ledger}
+        onEditEntry={editEntry}
+        currentPage={currentPage}
+        entriesPerPage={entriesPerPage}
+      />
+      <NewEntryForm addEntry={addEntry} currentBalance={balance} />
+      {/* Pagination controls */}
+      <div className="pagination">
+        {[...Array(totalPages)].map((_, index) => (
+          <button
+            key={index}
+            onClick={() => handlePageChange(index + 1)}
+            disabled={index + 1 === currentPage}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import NewEntryForm from './NewEntryForm';
 
-const LedgerTable = ({ ledger, onEditEntry, addEntry, currentBalance }) => {
+const LedgerTable = ({ ledger, onEditEntry, currentPage, entriesPerPage }) => {
+  const indexOfLastEntry = currentPage * entriesPerPage;
+  const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
+  const currentEntries = ledger.slice(indexOfFirstEntry, indexOfLastEntry);
+
   return (
     <table>
       <thead>
@@ -15,15 +18,14 @@ const LedgerTable = ({ ledger, onEditEntry, addEntry, currentBalance }) => {
         </tr>
       </thead>
       <tbody>
-        {ledger.map((entry, index) => (
+        {currentEntries.map((entry, index) => (
           <LedgerRow
             key={index}
-            index={index}
+            index={index + indexOfFirstEntry}
             entry={entry}
             onEditEntry={onEditEntry}
           />
         ))}
-        <NewEntryForm addEntry={addEntry} currentBalance={currentBalance} />
       </tbody>
     </table>
   );
