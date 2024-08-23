@@ -72,7 +72,7 @@ table {
 }
 
 th, td {
-  padding: 10px;
+  padding: 5px;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
@@ -93,52 +93,43 @@ tr:hover {
 /* Form styling */
 form.new-entry-form {
   display: flex;
-  justify-content: space-between;
   margin-top: 20px;
+  gap: 10px;
 }
 
 form.new-entry-form input[type="date"],
 form.new-entry-form input[type="text"],
 form.new-entry-form input[type="number"] {
-  padding: 5px; /* Slightly increased padding for better usability */
-  margin-right: 10px;
+  padding: 5px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 0.9rem;
-  flex: 1;
 }
 
-form.new-entry-form input[type="date"] {
-  max-width: 120px; /* Adjust width to align better with table */
+form.new-entry-form input {
+  max-width: 15%;
 }
 
-form.new-entry-form input[type="text"] {
-  max-width: 120px; /* Slightly increased width for more space */
-}
-
-form.new-entry-form input[type="number"] {
-  max-width: 100px;
+form.new-entry-form span {
+  width: 13%;
 }
 
 form.new-entry-form button[type="submit"] {
   background-color: #4a90e2;
   color: white;
   border: none;
-  padding: 8px 15px;
+  padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  flex-shrink: 0;
 }
 
 form.new-entry-form button[type="submit"]:hover {
   background-color: #357ABD;
 }
 
-
 /* Edit and Cancel buttons */
 button {
-  margin-right: 10px;
   background-color: #4a90e2;
   color: white;
   border: none;
@@ -153,7 +144,6 @@ button:hover {
 }
 
 /* Pagination */
-
 .pagination {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -161,27 +151,25 @@ button:hover {
 }
 
 .pagination button {
-  background-color: #4a90e2;
-  color: white;
+  color: #4a90e2;
   border: none;
-  padding: 8px 12px;
+  background-color: transparent;
+  padding: 5px 10px;
   margin: 0 5px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-weight: bold;
 }
 
-.pagination button:hover:not([disabled]) {
-  background-color: #357ABD;
+.pagination button:hover {
+  color: #0551a8;
 }
 
 .pagination button[disabled] {
-  background-color: #7fb3e9;
   cursor: not-allowed;
 }
 
 /* Responsive design */
-
 @media (max-width: 600px) {
   form {
     flex-direction: column;
