@@ -26,7 +26,7 @@ const App = () => {
       if (userDoc.exists()) {
         const userData = userDoc.data();
         setBalance(userData.balance || 0);
-        setLedger(userData.ledger || []);
+        setLedger((userData.ledger || []).reverse());
         setCurrentPage(1);
       } else {
         setBalance(0);
@@ -35,9 +35,10 @@ const App = () => {
     };
     fetchData();
   }, [selectedUser]);
+  
 
   const addEntry = async (entry) => {
-    const newLedger = [...ledger, entry];
+    const newLedger = [entry, ...ledger];
     const newBalance = entry.balance;
     await updateDoc(doc(db, 'users', selectedUser), { ledger: newLedger, balance: newBalance });
     setLedger(newLedger);
