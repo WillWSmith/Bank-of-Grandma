@@ -13,9 +13,9 @@ const NewEntryForm = ({ addEntry, currentBalance }) => {
       return;
     }
 
-    const debitValue = debit ? parseFloat(debit) : 0;
-    const creditValue = credit ? parseFloat(credit) : 0;
-    const newBalance = calculateNewBalance(debitValue, creditValue);
+    const debitValue = debit ? parseFloat(debit).toFixed(2) : 0;
+    const creditValue = credit ? parseFloat(credit).toFixed(2) : 0;
+    const newBalance = calculateNewBalance(parseFloat(debitValue), parseFloat(creditValue));
 
     const entry = {
       date,
