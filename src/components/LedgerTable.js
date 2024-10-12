@@ -73,7 +73,7 @@ const LedgerRow = ({ entry, index, onEditEntry }) => {
           <td>{entry.item}</td>
           <td>{entry.debit}</td>
           <td>{entry.credit}</td>
-          <td>{entry.balance}</td>
+          <td>${entry.balance}</td>
           <td>
             <button onClick={handleEditClick}>Edit</button>
           </td>
