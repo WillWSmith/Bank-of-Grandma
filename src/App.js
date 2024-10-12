@@ -9,6 +9,7 @@ import NewEntryForm from './components/NewEntryForm';
 
 // Styles
 import logo from './media/logo192.png';
+import background from './media/Money.jpeg'
 import './App.css';
 
 const users = ['Grandma', 'Desmond & Allie', 'Ronan', 'Nicole', 'Karen', 'Bob'];
@@ -18,6 +19,7 @@ const App = () => {
   const [balance, setBalance] = useState(0);
   const [ledger, setLedger] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const entriesPerPage = 10;
 
   useEffect(() => {
@@ -70,6 +72,8 @@ const App = () => {
     setBalance(finalBalance);
   };
 
+  
+
   // Pagination logic
   const totalPages = Math.ceil(ledger.length / entriesPerPage);
 
@@ -77,35 +81,48 @@ const App = () => {
     setCurrentPage(pageNumber);
   };
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(prevState => !prevState);
+  };
+
+  const handleUserSelect = (user) => {
+    setSelectedUser(user);
+    setIsDropdownOpen(false);
+  }
+
   return (
     <div className="app-container">
-      <div className="logo">
-        <img src={logo} alt="Bank of Grandma Logo" />
-      </div>
-      <div className="user-tabs">
-        <UserTabs users={users} selectUser={setSelectedUser} />
-      </div>
-      <Balance user={selectedUser} balance={balance} />
-      <LedgerTable
-        ledger={ledger}
-        onEditEntry={editEntry}
-        currentPage={currentPage}
-        entriesPerPage={entriesPerPage}
-      />
-      <div className="pagination">
-        {[...Array(totalPages)].map((_, index) => (
-          <button
-            key={index}
-            onClick={() => handlePageChange(index + 1)}
-            disabled={index + 1 === currentPage}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div>
-      <NewEntryForm addEntry={addEntry} currentBalance={balance} />
+      <div className="app-content"> {/* New wrapper for the content */}
+        <div className="logo">
+          <img src={logo} alt="Bank of Grandma Logo" />
+        </div>
+        
+        <div className="user-tabs">
+          <UserTabs users={users} selectUser={setSelectedUser} />
+        </div>
+        <Balance user={selectedUser} balance={balance} />
+        <LedgerTable
+          ledger={ledger}
+          onEditEntry={editEntry}
+          currentPage={currentPage}
+          entriesPerPage={entriesPerPage}
+        />
+        <div className="pagination">
+          {[...Array(totalPages)].map((_, index) => (
+            <button
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              disabled={index + 1 === currentPage}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+        <NewEntryForm addEntry={addEntry} currentBalance={balance} />
+      </div> {/* Close app-content */}
     </div>
   );
+  
 };
 
 export default App;
