@@ -9,18 +9,26 @@ const UserTabs = ({ users, selectUser }) => {
     <div className="user-tabs">
       {isMobile ? (
         <>
-          <button onClick={() => setIsOpen(!isOpen)} className="toggle-btn">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="toggle-btn"
+            aria-expanded={isOpen}
+          >
             <FaBars />
           </button>
-          {isOpen && (
-            <div className="user-dropdown">
-              {users.map((user) => (
-                <button key={user} onClick={() => selectUser(user)}>
-                  {user}
-                </button>
-              ))}
-            </div>
-          )}
+          <div className={`user-dropdown ${isOpen ? 'open' : ''}`}>
+            {users.map((user) => (
+              <button
+                key={user}
+                onClick={() => {
+                  selectUser(user);
+                  setIsOpen(false); // Close dropdown after selection
+                }}
+              >
+                {user}
+              </button>
+            ))}
+          </div>
         </>
       ) : (
         users.map((user) => (

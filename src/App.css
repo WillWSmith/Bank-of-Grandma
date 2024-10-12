@@ -319,12 +319,6 @@ button:hover {
   opacity: 1; 
 }
 
-  
-
-  tr {
-    display: none;
-  }
-
   form.new-entry-form input {
     margin-bottom: 10px;
   }
@@ -402,27 +396,36 @@ button:hover {
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 0;
-}
-button.toggle-btn {
-  display: block;
-  margin: 0 auto;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
 }
 
-.user-dropdown button {
-  background-color: #4a90e2;
-  color: white;
+.user-dropdown.open {
+  max-height: 500px;
+  opacity: 1;
+  overflow-y: auto;
+}
+
+button.toggle-btn {
+  background-color: transparent;
+  color: #4a90e2;
   border: none;
-  padding: 8px 12px;
-  margin: 0 auto;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  border-radius: 10;
-  font-size: 0.9rem;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1.5rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  text-align: center;
-  padding-left: 15px;
+}
 
+button.toggle-btn:hover {
+  background-color: rgba(74, 144, 226, 0.1);
+}
+
+button.toggle-btn:focus, 
+button.toggle-btn:active {
+  outline: none;
+  background-color: rgba(74, 144, 226, 0.3);
 }
 
 .user-dropdown button:hover {
